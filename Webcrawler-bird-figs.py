@@ -57,7 +57,11 @@ def download_imgs_and_make_dirs():
         url_href_list.append(url_href)
         category_list.append(category)
     for i in range(len(category_list)):
-        path = "C:/Users/Administrator/PycharmProjects/Bird-cv/%s"%(category_list[i])
+        path_img = "C:/Users/Shangjie Zou/PycharmProjects/Bird-recognition/Something-about-cv/imgs"
+        is_exists = os.path.exists(path_img)
+        if not is_exists:
+            os.makedirs(path_img)
+        path = "C:/Users/Shangjie Zou/PycharmProjects/Bird-recognition/Something-about-cv/imgs/%s"%(category_list[i])
         is_exists = os.path.exists(path)
         if not is_exists:
             os.makedirs(path)
@@ -88,8 +92,11 @@ def get_all_img_source(url, path):
             continue
     dict_img_href = dict(zip(title_list, src_href_list))
     print(dict_img_href)
+    k_count = 0
     for key in dict_img_href.keys():
-        urllib.request.urlretrieve(dict_img_href[key],path+"/%s.jpg" % (key))
+        str_count = str(k_count)
+        urllib.request.urlretrieve(dict_img_href[key],path+"/%s.jpg" % (str_count))
+        k_count += 1
 # _________________________________________________________________________________________________________
 
 
@@ -101,7 +108,7 @@ if __name__ == '__main__':
     if(1):
         #输出链接于文档txt
         fileoutput_categoryindex()
-    if(0):
-        #下载所有图片，需要时把if中的0改为1
+    if(1):
+        #下载所有图片
         download_imgs_and_make_dirs()
 
